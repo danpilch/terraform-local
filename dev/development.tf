@@ -12,7 +12,5 @@ data "terraform_remote_state" "master_state" {
 }
 
 module "vpc" {
-  source     = "../modules/vpc"
-  cidr_block = "10.2.0.0/16"
-  stack_name = "test"
+  source = "../modules/vpc"
 }
