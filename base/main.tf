@@ -1,9 +1,9 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = var.aws_config.region
 }
 
 module "tf_state_backend" {
-  source     = "./modules/tf_state_backend"
+  source     = "../modules/tf_state_backend"
   s3_tfstate = var.s3_tfstate
 }
 
