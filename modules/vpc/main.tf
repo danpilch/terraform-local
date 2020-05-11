@@ -1,4 +1,4 @@
-data "cloudflare_ip_ranges" "cloudflare" {}
+#data "cloudflare_ip_ranges" "cloudflare" {}
 # VPC
 resource "aws_vpc" "main" {
   cidr_block           = var.vpc_config.cidr_block
