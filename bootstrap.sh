@@ -4,10 +4,10 @@
 
 # Vars
 AWS_REGION="eu-west-1"
-BUCKET_NAME="dp-org-tf-state-2"
+BUCKET_NAME="dp-org-tf-state"
 TF_ENV="default"
 STATE_PATH="terraform/workspaces/$TF_ENV/terraform.tfstate"
-DYNAMODB_TABLE="dp-org-tf-state-table-2"
+DYNAMODB_TABLE="dp-org-tf-state-table"
 
 # Create initial main.tf
 cat > main.tf << EOL
@@ -23,13 +23,13 @@ module "tf_state_backend" {
 EOL
 
 # local init
-terraform init
+terraform init -input=true -get=true
 
 # plan bootstrap
 terraform plan
 
 # apply bootstrap
-terraform apply
+terraform apply -auto-approve
 
 # Update main.tf to add new s3 backend
 cat >> main.tf << EOL
@@ -63,10 +63,4 @@ EOL
 terraform fmt
 
 # Reconfigure backend to use remote state
-terraform init -reconfigure 
-
-# Import new S3 bucket into terraform state
-#terraform import -lock=false module.tf_state_backend.aws_s3_bucket.tfstate_bucket ${BUCKET_NAME}
-
-# Apply state to create dynamodb table
-#terraform apply -lock=false
+terraform init -reconfigure -input=true -get=true -force-copy 
