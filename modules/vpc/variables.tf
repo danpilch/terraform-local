@@ -12,7 +12,7 @@ variable "vpc_config" {
     shared_services_private_subnet_b_cidr = string
   })
   default = {
-    stack_name                            = "test"
+    stack_name                            = "vpc"
     cidr_block                            = "10.2.0.0/16"
     availability_zone_a                   = "eu-west-1a"
     availability_zone_b                   = "eu-west-1c"

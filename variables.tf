@@ -1,3 +1,16 @@
+# Overridden by each environment
+variable "environment" {}
+
+# Organisation name
+variable "organisation" {
+  type = string
+  default = "danpilch"
+}
+
+# Default IAM password
+variable "default_iam_password" {}
+
+# AWS configuration variables
 variable "aws_config" {
   type = object({
     region = string
@@ -7,6 +20,7 @@ variable "aws_config" {
   }
 }
 
+# Terraform remote state variables
 variable "s3_tfstate" {
   type = object({
     bucket         = string

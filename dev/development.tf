@@ -11,6 +11,15 @@ data "terraform_remote_state" "master_state" {
   }
 }
 
+module "iam" {
+  source = "../modules/iam"
+  iam_config = {
+    environment = var.environment
+    stack_name = join("-", ["iam", var.environment])
+    iam_default_password = var.default_iam_password
+  }
+}
+
 module "vpc" {
   source = "../modules/vpc"
 }
